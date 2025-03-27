@@ -23,7 +23,6 @@ const resolvers = {
         game: (review) => db.games.find(game => game.id === review.game_id)
     },
     Mutation: {
-        deleteGame: (_, args) => db.games.filter(game => game.id !== args.id),
         addGame(_, args) {
             let game = {
                 ...args.game,
@@ -32,7 +31,22 @@ const resolvers = {
             db.games.push(game)
 
             return game
-        }
+        },
+        updateGame(_, args) {
+            db.games = db.games.map(game => {
+                if (game.id === args.id) {
+                    return {
+                        ...game,
+                        ...args.edits
+                    }
+                }
+
+                return game
+            })
+
+            return db.games.find(game => game.id === args.id)
+        },
+        deleteGame: (_, args) => db.games.filter(game => game.id !== args.id)
     }
 }
 
