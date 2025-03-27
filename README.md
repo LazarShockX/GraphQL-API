@@ -1,4 +1,4 @@
-# GraphQL Game Reviews API
+# GraphQL API
 This is a simple GraphQL API for managing games, authors, and reviews. It allows you to query and mutate data related to games, authors, and their reviews.
 
 # 🚀 Features
