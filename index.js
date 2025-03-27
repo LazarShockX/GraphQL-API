@@ -11,6 +11,16 @@ const resolvers = {
         review: (_, args) => db.reviews.find(review => review.id === args.id),
         authors: () => db.authors,
         author: (_, args) => db.authors.find(author => author.id === args.id)
+    },
+    Game: {
+        reviews: (game) => db.reviews.filter(review => review.game_id === game.id)
+    },
+    Author: {
+        reviews: (author) => db.reviews.filter(review => review.author_id === author.id)
+    },
+    Review: {
+        author: (review) => db.authors.find(author => author.id === review.author_id),
+        game: (review) => db.games.find(game => game.id === review.game_id)
     }
 }
 
