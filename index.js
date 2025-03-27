@@ -21,6 +21,18 @@ const resolvers = {
     Review: {
         author: (review) => db.authors.find(author => author.id === review.author_id),
         game: (review) => db.games.find(game => game.id === review.game_id)
+    },
+    Mutation: {
+        deleteGame: (_, args) => db.games.filter(game => game.id !== args.id),
+        addGame(_, args) {
+            let game = {
+                ...args.game,
+                id: String(db.games.length + 1)
+            }
+            db.games.push(game)
+
+            return game
+        }
     }
 }
 
